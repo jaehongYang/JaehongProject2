@@ -7,8 +7,8 @@ import com.utils.Api_Client;
 public class CoinFunction {
 	
 	public void getCurrentCost(String coin, String connectKey, String secretKey) {
-		Api_Client api = new Api_Client("4ebd66aff5db3e7503d6172e971cb06b",
-				"fe3b19af14d2de923b2cb1372eb12a89");
+		Api_Client api = new Api_Client("",
+				"");
 		
 			HashMap<String, String> rgParams = new HashMap<String, String>();
 //			rgParams.put("order_currency", "BTC");
