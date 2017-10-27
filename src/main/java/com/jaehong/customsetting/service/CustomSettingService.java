@@ -1,4 +1,4 @@
-package com.jaehong.coin.service;
+package com.jaehong.customsetting.service;
 
 import org.springframework.stereotype.Service;
 

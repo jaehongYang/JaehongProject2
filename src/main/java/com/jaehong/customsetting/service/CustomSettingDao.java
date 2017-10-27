@@ -1,15 +1,14 @@
-package com.jaehong.coin.service;
+package com.jaehong.customsetting.service;
 
-import org.apache.ibatis.session.SqlSession;
+//import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 
 //@Repository
 public class CustomSettingDao {
 	
-	@Autowired
-	private SqlSession sqlSession;
+//	@Autowired
+//	private SqlSession sqlSession;
 	
 	public String getTest() {
 		return null;

@@ -2,33 +2,40 @@ package com.jaehong;
 
 import java.util.HashMap;
 
-import com.utils.Api_Client;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+@Component
 public class CoinFunction {
 	
-	public void getCurrentCost(String coin, String connectKey, String secretKey) {
-		Api_Client api = new Api_Client("",
-				"");
+	@Autowired
+	private Api_Client client;
+	
+	
+	@SuppressWarnings("unchecked")
+	public HashMap<String, Object> getCurrentCost(String coin, String type, HashMap<String, String> request) {
 		
-			HashMap<String, String> rgParams = new HashMap<String, String>();
-//			rgParams.put("order_currency", "BTC");
-//			rgParams.put("payment_currency", "KRW");
-			rgParams.put("currency", "QTUM");
+		String URI = "";
+		if(type.contains("public"))URI += URI + "/" + coin;
 		
+		ObjectMapper mapper = new ObjectMapper();
+		JSONObject obj = new JSONObject();
+		JSONParser parser = new JSONParser();
+		HashMap<String, Object> model = null;
+		String result = "";
 		
-			try {
-//			    String result = api.callApi("/public/ticker/QTUM", rgParams);
-//			    String result1 = api.callApi("/public/recent_transactions/QTUM", rgParams);
-//			    String result2 = api.callApi("/public/recent_transactions/QTUM", rgParams);
-				/** 현재 보유량 (각) */
-			    String result3 = api.callApi("/info/account", rgParams); 
-//			    System.out.println(result.toString());
-//			    System.out.println(result1.toString());
-//			    System.out.println(result2.toString());
-			    System.out.println(result3.toString());
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
+		try {
+		    result = client.callApi(URI, request);
+		    obj = (JSONObject)parser.parse(result.toString());
+			model = mapper.readValue(obj.get("data").toString(), HashMap.class);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		return model;
 	}
-
 }

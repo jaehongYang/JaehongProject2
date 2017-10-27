@@ -1,4 +1,4 @@
-package com.utils;
+package com.jaehong;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -11,20 +11,19 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.utils.HttpRequest;
+import com.utils.Util;
 
-
+@Component
 @SuppressWarnings("unused")
 public class Api_Client {
     protected String api_url = "https://api.bithumb.com";
-    protected String api_key;
-    protected String api_secret;
+    protected String api_key = "";
+    protected String api_secret = "";
 
-    public Api_Client(String api_key, String api_secret) {
-	this.api_key = api_key;
-	this.api_secret = api_secret;
-    }
 
     /**
      * ������ �ð��� ns�� �����Ѵ�.(1/1,000,000,000 ��)

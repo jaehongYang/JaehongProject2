@@ -1,26 +1,11 @@
 package com.jaehong.config;
 
-import java.util.HashMap;
-
-import javax.sql.DataSource;
-
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-
 //@Configuration
 //@PropertySource("classpath:/config/default-config.properties")
 //@MapperScan(value="com.jaehong.dao",sqlSessionFactoryRef="assetDbSessionFactory")
 public class DataSourceConfig {
 	
-	@Autowired
+	/*@Autowired
     private DataSourceProperties ds;
 	
 	@Autowired
@@ -55,5 +40,5 @@ public class DataSourceConfig {
 	@Bean 
 	public SqlSession sqlSessionForMyBatis(SqlSessionFactory sqlSessionFactory) {
 		  return new SqlSessionTemplate(sqlSessionFactory);
-		 }
+		 }*/
 }
