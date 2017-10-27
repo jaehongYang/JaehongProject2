@@ -34,7 +34,7 @@ public class CustomSettingController {
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public HashMap<String, Object> a () {
 		HashMap<String, String> request = new HashMap<String, String>();
-		HashMap<String, Object> result = function.getCurrentCost("QTUM", "/public/ticker", request);
+		HashMap<String, Object> result = function.callApi("QTUM", "/public/ticker", null);
 		return result;
 	}
 	

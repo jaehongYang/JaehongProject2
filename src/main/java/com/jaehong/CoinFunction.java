@@ -18,17 +18,15 @@ public class CoinFunction {
 	
 	
 	@SuppressWarnings("unchecked")
-	public HashMap<String, Object> getCurrentCost(String coin, String type, HashMap<String, String> request) {
+	public HashMap<String, Object> callApi(String coin, String URI, HashMap<String, String> request) {
 		
-		String URI = "";
-		if(type.contains("public"))URI += URI + "/" + coin;
+		if(URI.contains("public"))URI = URI + "/" + coin;
 		
 		ObjectMapper mapper = new ObjectMapper();
 		JSONObject obj = new JSONObject();
 		JSONParser parser = new JSONParser();
 		HashMap<String, Object> model = null;
 		String result = "";
-		
 		try {
 		    result = client.callApi(URI, request);
 		    obj = (JSONObject)parser.parse(result.toString());
