@@ -30,7 +30,14 @@ public class CoinFunction {
 		try {
 		    result = client.callApi(URI, request);
 		    obj = (JSONObject)parser.parse(result.toString());
-			model = mapper.readValue(obj.get("data").toString(), HashMap.class);
+		    if(URI.contains("trade")) {
+		    	System.out.println("CoinFunctionResult::"+ result.toString());
+		    }
+		    if(obj.get("status").equals("0000") && !URI.contains("trade")) {
+		    	model = mapper.readValue(obj.get("data").toString(), HashMap.class);
+		    }else {
+		    	System.out.println("Error::"+ obj.toString());
+		    }
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}

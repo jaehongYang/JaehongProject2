@@ -24,8 +24,16 @@ public  class StaticDefine {
 	
 	private static boolean XMR_YN = true;
 	private static float MAX_OPERATION_COST = 30000;
-	private static int MAX_BUY_COST = 231;
-	private static float MAX_SELL_COST = 233;
+	private static int MAX_BUY_COST = 232;
+	private static int MAX_SELL_COST = 233;
+	
+	
+	public static int getMAX_SELL_COST() {
+		return MAX_SELL_COST;
+	}
+	public static void setMAX_SELL_COST(int mAX_SELL_COST) {
+		MAX_SELL_COST = mAX_SELL_COST;
+	}
 	public static String getCu() {
 		return cu;
 	}
@@ -49,12 +57,6 @@ public  class StaticDefine {
 	}
 	public static void setMAX_BUY_COST(int mAX_BUY_COST) {
 		MAX_BUY_COST = mAX_BUY_COST;
-	}
-	public static float getMAX_SELL_COST() {
-		return MAX_SELL_COST;
-	}
-	public static void setMAX_SELL_COST(float mAX_SELL_COST) {
-		MAX_SELL_COST = mAX_SELL_COST;
 	}
 	public static String getPublicTicker() {
 		return public_ticker;

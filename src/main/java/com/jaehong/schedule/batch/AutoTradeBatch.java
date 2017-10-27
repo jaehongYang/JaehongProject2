@@ -25,28 +25,18 @@ public class AutoTradeBatch {
 	
 	@SuppressWarnings("unchecked")
 	public void execute() {
-		HashMap<String, String> request = new HashMap<String, String>();
-		request.put("currency", "XRP");
-		HashMap<String, Object> result = function.callApi("XRP", "/info/balance", request);
-		System.out.println(result);
-		// TODO Auto-generated method stub
 		if(StaticDefine.isXMR_YN()) {
 			HashMap<String, Object> currentCost = function.callApi("XRP", "/public/orderbook", null);
-//			System.out.println(currentCost.toString());
 			if(currentCost.get("payment_currency").equals("KRW") &&  currentCost.get("order_currency").equals("XRP")) {
-//				System.out.println("execute-1");
 				 ArrayList<HashMap<String, String>> bids = (ArrayList<HashMap<String, String>>)currentCost.get("bids");
 				 HashMap<String, String> bid = (HashMap<String, String>)bids.get(0);
 				 ArrayList<HashMap<String, String>> asks = (ArrayList<HashMap<String, String>>)currentCost.get("asks");
 				 HashMap<String, String> ask = (HashMap<String, String>)asks.get(0);
-//				 System.out.println(Float.parseFloat((String)bid.get("price")));
-//				 System.out.println(StaticDefine.getMAX_BUY_COST());
-//				 System.out.println(Float.parseFloat((String)bid.get("price")) < StaticDefine.getMAX_BUY_COST());
-				 if(Float.parseFloat((String)bid.get("price")) <= StaticDefine.getMAX_BUY_COST()) {
+//				 if(Float.parseFloat((String)bid.get("price")) <= StaticDefine.getMAX_BUY_COST()) {
 					 buyAnalisis(bid);
-				 }else if(Float.parseFloat((String)ask.get("price")) >= StaticDefine.getMAX_SELL_COST()){
+//				 }else if(Float.parseFloat((String)ask.get("price")) >= StaticDefine.getMAX_BUY_COST()){
 					 sellAnalisis(ask);
-				 };
+//				 };
 			}
 		}
 	}
@@ -56,36 +46,41 @@ public class AutoTradeBatch {
 		//TODO
 		System.out.println("buyAnalisis");
 		HashMap<String, String> request = new HashMap<String, String>();
+		request.put("currency", "XRP");
 		HashMap<String, Object> result = function.callApi("XRP", "/info/balance", request);
 		int quantity = (int) ((int)result.get("available_krw") / StaticDefine.getMAX_BUY_COST());
 		
 		if(quantity > 10 ) {
+			/**Float형을 변환*/
 			request.put("units", String.valueOf(quantity));
 			request.put("order_currency", "XRP");
 			request.put("type", "bid");
 			request.put("Payment_currency", "KRW");
 			request.put("misu", "N");
+			/**Integer형을 변환*/
 			request.put("price",String.valueOf(StaticDefine.getMAX_BUY_COST()));
 			System.out.println("request"+ request.toString());
 			function.callApi("XRP", "/trade/place", request);
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public void sellAnalisis(HashMap<String, String> ask) {
-		System.out.println("buyAnalisis");
+		System.out.println("sellAnalisis");
 		HashMap<String, String> request = new HashMap<String, String>();
+		request.put("currency", "XRP");
 		HashMap<String, Object> result = function.callApi("XRP", "/info/balance", request);
-		int quantity = (int) ((int)result.get("available_krw") / StaticDefine.getMAX_BUY_COST());
+		float available = Float.parseFloat((String) result.get("available_xrp")) + 0;
 		
-		if(quantity > 10 && false) {
-			request.put("units", String.valueOf(quantity));
+		if(available > 10) {
+			request.put("units", String.valueOf(available));
 			request.put("order_currency", "XRP");
 			request.put("type", "ask");
 			request.put("Payment_currency", "KRW");
 			request.put("misu", "N");
 			request.put("price",String.valueOf(StaticDefine.getMAX_SELL_COST()));
-			System.out.println("request"+ request.toString());
 			function.callApi("XRP", "/trade/place", request);
+			System.out.println("거래 완료");
 		}
 	}
 	
