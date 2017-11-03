@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jaehong.CoinFunction;
 import com.jaehong.CommonUtils;
+import com.jaehong.DynamoDbClient;
 import com.jaehong.customsetting.service.CustomSettingService;
 import com.jaehong.define.StaticDefine;
 import com.jaehong.model.TickerModel;
@@ -30,6 +31,9 @@ public class CustomSettingController {
 	
 	@Autowired
 	private StaticDefine define;
+	
+	@Autowired
+	private DynamoDbClient dynamodb;
 
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public HashMap<String, Object> a () {
@@ -52,5 +56,12 @@ public class CustomSettingController {
 		
 		
 		return define.getCu();
+	}
+	
+	@RequestMapping(value="/cc", method=RequestMethod.GET)
+	public String b13 () {
+		
+		
+		return dynamodb.getClient().listTables().toString();
 	}
 }

@@ -84,7 +84,7 @@ public class ScheduleConfig implements SchedulingConfigurer {
      */
     @Scheduled(cron="1/10 * * * * *")
     public void Batch() throws Exception {
-    	if(StaticDefine.getCu().equals("Y")) {
+    	if(StaticDefine.getCu().equals("Y") && false) {
     		autoTradeBatch.execute();
     	}
     }

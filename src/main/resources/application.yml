@@ -1,11 +1,14 @@
 server :
   port : 7777
   
-
+logging:
+  file: /home/ubuntu/deploy/logs/aaa.log
 ---
 
 spring :
   profiles : default 
   port : 7777
+  logging:
+  file: /home/ubuntu/deploy/logs/aaa.log
   
   

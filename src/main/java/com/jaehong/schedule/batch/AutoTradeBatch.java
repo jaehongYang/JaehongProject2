@@ -99,6 +99,10 @@ public class AutoTradeBatch {
 	public void reservedBuyCancel() {
 		//TODO
 	}
+	
+	public void myGain{
+		
+	}
 
 
 	
